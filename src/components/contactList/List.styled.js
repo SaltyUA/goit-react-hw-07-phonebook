@@ -2,7 +2,7 @@ const { default: styled } = require('styled-components');
 
 const ListStyled = styled('ul')(() => ({
   margin: '0 auto',
-  width: 300,
+  width: 500,
   display: 'flex',
   flexDirection: 'column',
   gap: 10,
