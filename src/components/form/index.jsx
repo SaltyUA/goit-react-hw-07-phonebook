@@ -7,14 +7,14 @@ import {
   SubmitButton,
 } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'store/selectors';
-import { addContact } from 'store/contacts/slice';
+import { selectContacts } from 'store/selectors';
+import { addContact } from 'store/contacts/thunks';
 
 const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {

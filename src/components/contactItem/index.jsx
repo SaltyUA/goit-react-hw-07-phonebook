@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { ContactTypography, DeleteButton } from './ContactItem.styled';
-import { deleteContact } from 'store/contacts/slice';
+import { deleteContact } from 'store/contacts/thunks';
 
 const ContactItem = ({ name, id, number }) => {
   const dispatch = useDispatch();

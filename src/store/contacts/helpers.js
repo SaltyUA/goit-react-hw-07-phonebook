@@ -1,10 +1,13 @@
-import { nanoid } from '@reduxjs/toolkit';
+export const handlePending = state => {
+  state.contacts.isLoading = true;
+};
 
-export const createContactObject = data => {
-  return {
-    payload: {
-      ...data,
-      id: nanoid(),
-    },
-  };
+export const handleRejected = (state, { error }) => {
+  state.contacts.isLoading = false;
+  state.contacts.error = error.message;
+};
+
+export const handleFullfilled = state => {
+  state.contacts.isLoading = false;
+  state.contacts.error = null;
 };

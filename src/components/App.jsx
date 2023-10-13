@@ -1,44 +1,22 @@
 import Form from './form';
 import ContactList from './contactList';
-import FilterInput from './filterInput';
-import { useSelector } from 'react-redux';
-import { getContacts, getFilter } from 'store/selectors';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchAllContacts } from 'store/contacts/thunks';
 
 const App = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-  // useEffect(() => {
-  //   const localContacts = localStorage.getItem('contacts');
-  //   if (localContacts && JSON.parse(localContacts).length !== 0)
-  //     setContacts(JSON.parse(localContacts));
-  // }, []);
-  // const submitContact = ({ name, number }) => {
-  //   const id = nanoid();
-  //   setContacts(prev => [...prev, { id, name, number }]);
-  // };
-  // useEffect(() => {
-  //   contacts && localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
+  const dispatch = useDispatch();
 
-  const getFilteredContacts = () =>
-    contacts &&
-    contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
+  useEffect(() => {
+    dispatch(fetchAllContacts());
+  }, [dispatch]);
 
   return (
     <div>
       <h1>Phonebook</h1>
       <Form />
       <h2>Contacts</h2>
-      {contacts && contacts.length > 0 ? (
-        <FilterInput />
-      ) : (
-        <p>There are no contacts yet</p>
-      )}
-      {contacts && getFilteredContacts().length > 0 && (
-        <ContactList contacts={getFilteredContacts()} />
-      )}
+      <ContactList />
     </div>
   );
 };
